@@ -2,10 +2,14 @@ import tkinter
 window = tkinter.Tk()
 x = 0
 y = 0
-left = 6
+index = 0
 
+colors_List = ['YELLOW', 'ORANGE', 'RED', 'PURPLE', 'BLACK']
 
-def update(left, x, y):
+def update(I, x, y):
+    if I == len(colors_List):
+        window.destroy()
+        exit()
 
     x+=50
     y+=50
@@ -14,25 +18,10 @@ def update(left, x, y):
     window.geometry(f'{x}x{y}')
     window.resizable(True, True)
 
-    if left == 6:
-        pass
-    elif left == 5:
-        window.config(bg = 'YELLOW')
-    elif left == 4:
-        window.config(bg = 'ORANGE')
-    elif left == 3:
-        window.config(bg = 'RED')
-    elif left == 2:
-        window.config(bg = 'PURPLE')
-    elif left == 1:
-        window.config(bg = 'BLACK')
-    else:
-        window.destroy()
-
-    window.after(1000, lambda:update(left, x, y))
-    left-=1
-
-
-update(left, x, y)
+    window.config(bg = colors_List[I])
+    window.after(1000, lambda:update(I, x, y))
+    I += 1
+    
+update(index, x, y)
 
 window.mainloop()

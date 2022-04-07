@@ -22,13 +22,13 @@ button1 = Button(
     root,
     text = 'Up',
     style = 'button_Config.TButton',
-    command = lambda: update(value, True)
+    command = lambda: update(1)
 )
 button2 = Button(
     root,
     text = 'Down',
     style = 'button_Config.TButton',
-    command = lambda: update(value, False)
+    command = lambda: update(-1)
 )
 label = Label(
     root,
@@ -39,19 +39,15 @@ button1.pack(ipadx = 50, ipady = 10, pady = 50)
 label.pack(ipadx = 50, ipady = 10)
 button2.pack(ipadx = 50, ipady = 10, pady = 50)
 
-def update(V, O):
+def update(x):
     global value
-    if O:
-        V += 1
-    elif not O:
-        V -= 1
-    value = V
-    label.config(text = f'{V}')
-    if V == 0:
+    value += x
+    label.config(text = f'{value}')
+    if value == 0:
         root.config(bg = 'GREY')
-    elif V > 0:
+    elif value > 0:
         root.config(bg = 'GREEN')
-    elif V < 0:
+    elif value < 0:
         root.config(bg = 'RED')
 
 root.mainloop()
